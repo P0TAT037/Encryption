@@ -5,22 +5,33 @@ import java.util.Scanner;
 public class Playfair {
 
     public static void main(String[] args) {
+
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Text: ");
-        String txt = scan.nextLine();
+        String txt = scan.next();
         System.out.print("Key: ");
-        String key = scan.nextLine();
+        String key = scan.next();
 
-        char [][] table = generateTable(key);
+        char[][] table = generateTable(key);
         System.out.println("Encryption table:");
 
         printTable(table);
 
-        System.out.println("preprocessed text: " + preprocess(txt));
+        System.out.println("Preprocessed text: " + preprocess(txt));
 
-        System.out.println("Encrypted text: " + encrypt(txt, key));
-        System.out.println("Decrypted text: " + decrypt(txt, key));
+        while (true) {
+            System.out.println("1: Encrypt");
+            System.out.println("2: Decrypt");
+            String input = scan.next();
+            if (input.equals("1")) {
+                System.out.println("Encrypted text: " + encrypt(txt, key));
+                break;
+            } else if (input.equals("2")) {
+                System.out.println("Decrypted text: " + decrypt(txt, key));
+                break;
+            }
+        }
     }
 
     static char[][] generateTable(String key) {
@@ -104,12 +115,12 @@ public class Playfair {
                 decrypted += table[xy2[0]][(xy2[1]-1+6)%5];
 
             } else if(xy1[1] == xy2[1]) { //on the same col
-                decrypted += table[(xy1[0]+5)%5][xy1[1]];
-                decrypted += table[(xy2[0]+5)%5][xy2[1]];
+                decrypted += table[(xy1[0]+4)%5][xy1[1]];
+                decrypted += table[(xy2[0]+4)%5][xy2[1]];
 
             } else {
-                decrypted += table[xy1[0]][xy1[1]];
-                decrypted += table[xy2[0]][xy2[1]];
+                decrypted += table[xy1[0]][xy2[1]];
+                decrypted += table[xy2[0]][xy1[1]];
             }
         }
 
@@ -150,12 +161,11 @@ public class Playfair {
 
     static void printTable(char[][] table) {
         for (int i = 0; i<5; i++) {
-            System.out.println();
             for(int j = 0; j<5; j++){
                 System.out.print(table[i][j] + " ");
             }
+            System.out.println();
         }
-        System.out.println();
     }
 
 }
