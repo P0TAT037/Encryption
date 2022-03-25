@@ -31,7 +31,7 @@ public class Vigenere {
                 System.out.println("Encrypted text: " + encrypt(txt, key, table));
                 break;
             } else if (input.equals("2")) {
-                System.out.println("Decrypted text: " + decrypt(txt, key, table));
+                System.out.println("Decrypted text: " + decrypt(txt, key));
                 break;
             }
         }
@@ -58,7 +58,7 @@ public class Vigenere {
         return encrypted;
     }
 
-    private static String decrypt( String text, String key, char[][] table) {
+    private static String decrypt( String text, String key) {
 
         String decrypted = "";
 
