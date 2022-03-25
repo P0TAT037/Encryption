@@ -63,18 +63,13 @@ public class Vigenere {
         String decrypted = "";
 
         for(int i = 0; i< text.length(); i++){
-            int col = alpha.indexOf(key.charAt(i % key.length()));
-
-            int x = 0;
-            for(int j = 0; j<26; j++){
-                if(table[j][col] == text.charAt(i)){
-                    x=j;
-                    break;
-                }
-            }
-
-            decrypted+=table[x][0];
+            int c = alpha.charAt((text.charAt(i) - key.charAt(i % key.length()) + 26) %26);
+            decrypted += (char) c;
         }
+        //the way the table was designed implies that the cipher text
+        //would be the sum of the plain text chars and the key chars so,
+        //it can be decrypted by subtracting the key from the cipher text
+
         return decrypted;
     }
 
