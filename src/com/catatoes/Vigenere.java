@@ -31,7 +31,7 @@ public class Vigenere {
                 System.out.println("Encrypted text: " + encrypt(txt, key, table));
                 break;
             } else if (input.equals("2")) {
-                System.out.println("Decrypted text: " + decrypt(txt, key));
+                System.out.println("Decrypted text: " + decrypt(txt, key, table));
                 break;
             }
         }
@@ -49,28 +49,32 @@ public class Vigenere {
     }
 
     private static String encrypt( String text, String key, char[][] table) {
-        String encrypted = "";
+        String encryption = "";
         for (int i = 0; i < text.length(); i++) {
             int x = alpha.indexOf(text.charAt(i));
             int y =alpha.indexOf(key.charAt(i%key.length()));
-            encrypted += table[x][y];
+            encryption += table[x][y];
         }
-        return encrypted;
+        return encryption;
     }
 
-    private static String decrypt( String text, String key) {
+    private static String decrypt( String text, String key, char[][] table) {
+        String decryption = "";
 
-        String decrypted = "";
+        for(int i = 0; i< text.length(); i++) {
+            int col = alpha.indexOf(key.charAt(i % key.length()));
 
-        for(int i = 0; i< text.length(); i++){
-            int c = alpha.charAt((text.charAt(i) - key.charAt(i % key.length()) + 26) %26);
-            decrypted += (char) c;
+            int x = 0;
+            for (int j = 0; j < 26; j++) {
+                if (table[j][col] == text.charAt(i)) {
+                    x = j;
+                    break;
+                }
+            }
+
+            decryption += table[x][0];
         }
-        //the way the table was designed implies that the cipher text
-        //would be the sum of the plain text chars and the key chars so,
-        //it can be decrypted by subtracting the key from the cipher text
-
-        return decrypted;
+        return decryption;
     }
 
     private static void printTable(char[][] table) {

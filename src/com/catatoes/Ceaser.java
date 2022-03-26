@@ -7,39 +7,42 @@ public class Ceaser {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("1:Encrypt\n2:Decrypt");
-        int choice = scan.nextInt();
         System.out.print("Text: ");
-        String s = scan.next();
+        String txt = scan.next();
         System.out.print("Key: ");
         int key = scan.nextInt();
 
-        if(choice == 1) {
-            System.out.println(Encypher(s, key));
+        while (true) {
+            System.out.println("1: Encrypt");
+            System.out.println("2: Decrypt");
+            String input = scan.next();
+            if (input.equals("1")) {
+                System.out.println("Encrypted text: " + encrypt(txt, key));
+                break;
+            } else if (input.equals("2")) {
+                System.out.println("Decrypted text: " + decrypt(txt, key));
+                break;
+            }
         }
-        else {
-            System.out.println(Decypher(s, key));
-        }
-
     }
 
-    static String Encypher(String s, int key){
-        s = s.toLowerCase();
-        String c = "";
-        for(int i = 0 ; i < s.length(); i++){
-             c += (char) (((s.charAt(i) + key-97) % 26)+97);
+    static String encrypt(String txt, int key){
+        txt = txt.toUpperCase();
+        String encryption = "";
+        for(int i = 0 ; i < txt.length(); i++){
+             encryption += (char) (((txt.charAt(i) + key-97) % 26)+97);
         }
-        return c;
+        return encryption;
     }
 
 
-    static String Decypher(String s, int key){
-        s = s.toLowerCase();
-        String c = "";
-        for(int i = 0 ; i < s.length(); i++){
-            c += (char) (((s.charAt(i) - key-97) % 26)+97);
+    static String decrypt(String txt, int key){
+        txt = txt.toUpperCase();
+        String decryption = "";
+        for(int i = 0 ; i < txt.length(); i++){
+            decryption += (char) (((txt.charAt(i) - key-97) % 26)+97);
         }
-        return c;
+        return decryption;
     }
 }
 

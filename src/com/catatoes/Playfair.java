@@ -73,7 +73,7 @@ public class Playfair {
 
     static String encrypt(String txt, String key) {
 
-        String encrypted = "";
+        String encryption = "";
         char[][] table = generateTable(key);
         txt = preprocess(txt);
 
@@ -83,25 +83,25 @@ public class Playfair {
             int[] xy2 = getXY(table, txt.charAt(i+1));
 
             if(xy1[0] == xy2[0]){ //on the same row
-                encrypted += table[xy1[0]][(xy1[1]+1)%5];
-                encrypted += table[xy2[0]][(xy2[1]+1)%5];
+                encryption += table[xy1[0]][(xy1[1]+1)%5];
+                encryption += table[xy2[0]][(xy2[1]+1)%5];
 
             } else if(xy1[1] == xy2[1]) { //on the same col
-                encrypted += table[(xy1[0]+1)%5][xy1[1]];
-                encrypted += table[(xy2[0]+1)%5][xy2[1]];
+                encryption += table[(xy1[0]+1)%5][xy1[1]];
+                encryption += table[(xy2[0]+1)%5][xy2[1]];
 
             } else {
-                encrypted += table[xy1[0]][xy2[1]];
-                encrypted += table[xy2[0]][xy1[1]];
+                encryption += table[xy1[0]][xy2[1]];
+                encryption += table[xy2[0]][xy1[1]];
             }
         }
 
-        return encrypted;
+        return encryption;
     }
 
     static String decrypt(String txt, String key) {
 
-        String decrypted = "";
+        String decryption = "";
         char[][] table = generateTable(key);
         txt = preprocess(txt);
 
@@ -111,20 +111,20 @@ public class Playfair {
             int[] xy2 = getXY(table, txt.charAt(i+1));
 
             if(xy1[0] == xy2[0]){ //on the same row
-                decrypted += table[xy1[0]][(xy1[1]-1+6)%5];
-                decrypted += table[xy2[0]][(xy2[1]-1+6)%5];
+                decryption += table[xy1[0]][(xy1[1]-1+6)%5];
+                decryption += table[xy2[0]][(xy2[1]-1+6)%5];
 
             } else if(xy1[1] == xy2[1]) { //on the same col
-                decrypted += table[(xy1[0]+4)%5][xy1[1]];
-                decrypted += table[(xy2[0]+4)%5][xy2[1]];
+                decryption += table[(xy1[0]+4)%5][xy1[1]];
+                decryption += table[(xy2[0]+4)%5][xy2[1]];
 
             } else {
-                decrypted += table[xy1[0]][xy2[1]];
-                decrypted += table[xy2[0]][xy1[1]];
+                decryption += table[xy1[0]][xy2[1]];
+                decryption += table[xy2[0]][xy1[1]];
             }
         }
 
-        return decrypted;
+        return decryption;
     }
 
     static String preprocess(String txt){
