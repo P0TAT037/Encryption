@@ -52,7 +52,7 @@ public class Vigenere {
         String encryption = "";
         for (int i = 0; i < text.length(); i++) {
             int x = alpha.indexOf(text.charAt(i));
-            int y =alpha.indexOf(key.charAt(i%key.length()));
+            int y = alpha.indexOf(key.charAt(i%key.length()));
             encryption += table[x][y];
         }
         return encryption;

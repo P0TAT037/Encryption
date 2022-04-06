@@ -129,6 +129,8 @@ public class Playfair {
 
     static String preprocess(String txt){
         txt = txt.toUpperCase();
+        txt = txt.replaceAll("[^A-Z]", "");
+        txt = txt.replace("J", "I");
 
         //add X between identical chars in the same slot
         String mod;
@@ -169,4 +171,3 @@ public class Playfair {
     }
 
 }
-
