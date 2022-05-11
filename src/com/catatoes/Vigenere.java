@@ -39,7 +39,7 @@ public class Vigenere {
     }
 
     private static char[][] createTable() {
-        char matrix[][] = new char[26][26];
+        char[][] matrix = new char[26][26];
         for (int i = 0; i < 26; i++) {
             for (int j = 0; j < 26; j++) {
                 matrix[i][j] = alpha.charAt((i + j) % 26);
@@ -48,7 +48,7 @@ public class Vigenere {
         return matrix;
     }
 
-    private static String encrypt( String text, String key, char[][] table) {
+    private static String encrypt(String text, String key, char[][] table) {
         String encryption = "";
         for (int i = 0; i < text.length(); i++) {
             int x = alpha.indexOf(text.charAt(i));
